@@ -109,8 +109,7 @@ def get_session_with_promo(session_base_url, voucher_code):
             print('did not find session, trying another...')
     return
 
-def get_deliveroo_number():
-    sms_man_token = 'oMU--5abjUORfjseszez7JhTjHKNYXyv'
+def get_deliveroo_number(sms_man_token):
     deliveroo_code = '234'
     country_code = '100'
 
@@ -119,18 +118,16 @@ def get_deliveroo_number():
     print(r.text)
     return r.json()
 
-def get_phone_no():
-    data = get_deliveroo_number()
+def get_phone_no(sms_man_token):
+    data = get_deliveroo_number(sms_man_token)
     return data['number'], data['request_id']
 
-def reject_deliveroo_number(request_id):
-    sms_man_token = 'oMU--5abjUORfjseszez7JhTjHKNYXyv'
+def reject_deliveroo_number(sms_man_token, request_id):
     r = requests.get(f"http://api.sms-man.com/control/set-status?token={sms_man_token}&request_id={request_id}&status=reject")
 
     return r.json()
 
-def get_sms(request_id):
-    sms_man_token = 'oMU--5abjUORfjseszez7JhTjHKNYXyv'
+def get_sms(sms_man_token, request_id):
     r = requests.get(f"http://api.sms-man.com/control/get-sms?token={sms_man_token}&request_id={request_id}")
 
     return r.json()
@@ -295,10 +292,10 @@ def redeem_code(session, voucher, user_id, guid, session_guid, bearer_token):
 
     return r.json()
 
-def poll_number(request_id):
+def poll_number(sms_man_token, request_id):
 
     for i in range(0,20):
-        poll_sms_response = get_sms(request_id)
+        poll_sms_response = get_sms(sms_man_token, request_id)
         if 'sms_code' in poll_sms_response:
             return poll_sms_response['sms_code']
         else:
@@ -446,12 +443,12 @@ def send_message_whatsapp(message, user_phone):
 
     return r.json()
 
-def do_roo(session_base_url, email_suffix, personal_info, card_info, address, voucher_code):
+def do_roo(sms_man_token, session_base_url, email_suffix, personal_info, card_info, address, voucher_code):
 
     proceed = False
     user_phone = personal_info["user_phone"]
 
-    number, request_id = get_phone_no()
+    number, request_id = get_phone_no(sms_man_token)
     email = get_random_words() + '@' + email_suffix
     print(f"generated the email id {email} for you")
     send_message_whatsapp(f"generated the email id {email} for you", user_phone)
@@ -466,14 +463,14 @@ def do_roo(session_base_url, email_suffix, personal_info, card_info, address, vo
 
     print("Sent code to phone number...")
 
-    code = poll_number(request_id)
+    code = poll_number(sms_man_token, request_id)
 
     if code == 'rejected':
 
         print("phone number didn't work, trying again")
         send_message_whatsapp("phone number didn't work, trying again", user_phone)
 
-        number, request_id = get_phone_no()
+        number, request_id = get_phone_no(sms_man_token)
         email = get_random_words() + '@' + email_suffix
         print(f"generated the email id {email} for you")
         session_data = get_session_with_promo(session_base_url, voucher_code)
@@ -486,12 +483,12 @@ def do_roo(session_base_url, email_suffix, personal_info, card_info, address, vo
 
         print("Sent code to phone number...")
 
-        code = poll_number(request_id)
+        code = poll_number(sms_man_token, request_id)
 
         if code == 'rejected':
 
             send_message_whatsapp("phone number didn't work, trying again", user_phone)
-            number, request_id = get_phone_no()
+            number, request_id = get_phone_no(sms_man_token)
             email = get_random_words() + '@' + email_suffix
             print(f"generated the email id {email} for you")
             session_data = get_session_with_promo(session_base_url, voucher_code)
@@ -504,14 +501,12 @@ def do_roo(session_base_url, email_suffix, personal_info, card_info, address, vo
 
             print("Sent code to phone number...")
 
-            code = poll_number(request_id)
+            code = poll_number(sms_man_token, request_id)
 
             if code == 'rejected':
-
                 proceed = False
 
             else:
-
                 proceed = True
 
         else:
