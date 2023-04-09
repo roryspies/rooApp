@@ -448,7 +448,7 @@ def do_roo(sms_man_token, session_base_url, personal_info, card_info, address, v
     proceed = False
     user_phone = personal_info["user_phone"]
 
-    email_suffix = '@puppet.lol'
+    email_suffix = 'puppet.lol'
 
     number, request_id = get_phone_no(sms_man_token)
     email = get_random_words() + '@' + email_suffix
