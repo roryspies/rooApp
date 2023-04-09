@@ -24,7 +24,6 @@ def run_roo():
 
     session_base_url = content['session_base_url']
     sms_man_token = content['sms_man_token']
-    email_suffix = content['email_suffix']
     personal_info = content['personal_info']
     card_info = content['card_info']
     address = content['address']
@@ -33,9 +32,8 @@ def run_roo():
 
     print("CARD INFO")
     print(card_info)
-
-    #return (session_base_url, email_suffix, address)
-    do_roo(sms_man_token, session_base_url, email_suffix, personal_info, card_info, address, voucher_code)
+    
+    do_roo(sms_man_token, session_base_url, personal_info, card_info, address, voucher_code)
 
     return
 

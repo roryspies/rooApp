@@ -443,10 +443,12 @@ def send_message_whatsapp(message, user_phone):
 
     return r.json()
 
-def do_roo(sms_man_token, session_base_url, email_suffix, personal_info, card_info, address, voucher_code):
+def do_roo(sms_man_token, session_base_url, personal_info, card_info, address, voucher_code):
 
     proceed = False
     user_phone = personal_info["user_phone"]
+
+    email_suffix = '@puppet.lol'
 
     number, request_id = get_phone_no(sms_man_token)
     email = get_random_words() + '@' + email_suffix
