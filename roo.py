@@ -490,6 +490,7 @@ def do_roo(sms_man_token, session_base_url, personal_info, card_info, address, v
         number, request_id = get_phone_no(sms_man_token)
         email = get_random_words() + '@' + email_suffix
         print(f"generated the email id {email} for you")
+        send_message_whatsapp(f"generated the email id {email} for you", user_phone)
         session_data = get_session_with_promo(session_base_url, voucher_code)
         session = session_data[0]
         guid = session_data[1]
@@ -508,6 +509,7 @@ def do_roo(sms_man_token, session_base_url, personal_info, card_info, address, v
             number, request_id = get_phone_no(sms_man_token)
             email = get_random_words() + '@' + email_suffix
             print(f"generated the email id {email} for you")
+            send_message_whatsapp(f"generated the email id {email} for you", user_phone)
             session_data = get_session_with_promo(session_base_url, voucher_code)
             session = session_data[0]
             guid = session_data[1]
