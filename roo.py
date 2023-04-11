@@ -303,7 +303,7 @@ def poll_number(sms_man_token, request_id):
             time.sleep(0.8)
 
     #no sms found, try again
-    reject_deliveroo_number(request_id)
+    reject_deliveroo_number(sms_man_token, request_id)
     print('rejected')
 
     return 'rejected'
@@ -376,6 +376,18 @@ def generate_stripe_token(card_info):
 
 def add_token(nonce, user_id, bearer_token, guid, session_guid):
 
+    print("USER ID")
+    print(user_id)
+    print("######")
+
+    print("GUID")
+    print(guid)
+    print("######")
+
+    print("SESSION GUID")
+    print(session_guid)
+    print("######")
+
     url = f"https://api.uk.deliveroo.com/orderapp/v1/users/{user_id}/payment-tokens"
 
     headers = {
@@ -399,6 +411,9 @@ def add_token(nonce, user_id, bearer_token, guid, session_guid):
     }
 
     r = requests.post(url, headers=headers, data=json.dumps(body))
+
+    print(r)
+    print(r.text)
 
     return r.json()
 
@@ -534,6 +549,10 @@ def do_roo(sms_man_token, session_base_url, personal_info, card_info, address, v
         #Get auth token and user id
         user_id = create_account_response['id']
         bearer_token = create_account_response['consumer_auth_token']
+
+        print("BEARER TOKEN")
+        print(bearer_token)
+        print("#####")
 
         print("generated account")
         send_message_whatsapp("generated account", user_phone)
