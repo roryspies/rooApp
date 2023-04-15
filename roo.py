@@ -397,6 +397,14 @@ def add_token(nonce, user_id, bearer_token, guid, session_guid):
     print(session_guid)
     print("######")
 
+    proxy_info = {
+        'http': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000',
+        'https': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000'
+    }
+
+    session = requests.Session()
+    session.proxies = proxy_info
+
     url = f"https://api.uk.deliveroo.com/orderapp/v1/users/{user_id}/payment-tokens"
 
     headers = {
@@ -412,6 +420,8 @@ def add_token(nonce, user_id, bearer_token, guid, session_guid):
             "x-roo-sticky-guid": guid,
             "x-roo-session-guid": session_guid
         }
+    
+    session.headers.update(headers)
 
     body = {
         "provider": "stripe",
@@ -419,7 +429,7 @@ def add_token(nonce, user_id, bearer_token, guid, session_guid):
         "checkout_id": str(uuid.uuid4()),
     }
 
-    r = requests.post(url, headers=headers, data=json.dumps(body))
+    r = session.post(url, headers=headers, data=json.dumps(body))
 
     print(r)
     print(r.text)
