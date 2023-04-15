@@ -95,7 +95,7 @@ def getlink(email):
 
 def get_session_with_promo(session_base_url, voucher_code):
 
-    for i in range(0,10):
+    for i in range(0,13):
 
         proxy_info = {
             'http': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000',
@@ -461,6 +461,10 @@ def signup_plus_trail(payment_method_id, user_id, bearer_token, guid, session_gu
     }
 
     r = requests.post(url, headers=headers, data=json.dumps(body))
+
+    print("##PLUS##")
+    print(r)
+    print(r.text)
 
     return r.json()
 
