@@ -96,8 +96,17 @@ def getlink(email):
 def get_session_with_promo(session_base_url, voucher_code):
 
     for i in range(0,10):
+
+        proxy_info = {
+            'http': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000',
+            'https': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000'
+        }
+
         session = requests.Session()
+        session.proxies = proxy_info
+        
         r = session.get(session_base_url)
+        
         if voucher_code in r.text:
             print('found session!')
 
