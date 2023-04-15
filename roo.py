@@ -447,11 +447,11 @@ def signup_plus_trail(payment_method_id, user_id, bearer_token, guid, session_gu
 
 def send_message_whatsapp(message, user_phone):
 
-    url = f"http://whatsapp.onestore.ng/api/sendText?phone={user_phone}&text={message}&session=roo"
+    url = f"http://68.183.40.173:3000/api/sendText?phone={user_phone}&text={message}&session=roo"
 
     payload={}
     headers = {
-      'x-api-key': 'T5aPWpASDGWTEG2317'
+      'x-api-key': 'ed28cd74-d33b-495f-be42-d4faa9b463ee'
     }
 
     r = requests.request("GET", url, headers=headers, data=payload)
