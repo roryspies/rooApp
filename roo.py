@@ -438,6 +438,14 @@ def add_token(nonce, user_id, bearer_token, guid, session_guid):
 
 def signup_plus_trail(payment_method_id, user_id, bearer_token, guid, session_guid):
 
+    proxy_info = {
+        'http': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000',
+        'https': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000'
+    }
+
+    session = requests.Session()
+    session.proxies = proxy_info
+
     url = f"https://api.uk.deliveroo.com/orderapp/v1/users/{user_id}/subscriptions"
 
     headers = {
@@ -460,7 +468,7 @@ def signup_plus_trail(payment_method_id, user_id, bearer_token, guid, session_gu
         "immediate_charge_ack": False
     }
 
-    r = requests.post(url, headers=headers, data=json.dumps(body))
+    r = session.post(url, headers=headers, data=json.dumps(body))
 
     print("##PLUS##")
     print(r)
