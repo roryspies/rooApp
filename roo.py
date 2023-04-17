@@ -1,6 +1,8 @@
 import random
 import string
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 import json
 import time
 import uuid
@@ -103,6 +105,10 @@ def get_session_with_promo(session_base_url, voucher_code):
         }
 
         session = requests.Session()
+        retry = Retry(connect=5, backoff_factor=0.5)
+        adapter = HTTPAdapter(max_retries=retry)
+        session.mount('http://', adapter)
+        session.mount('https://', adapter)
         session.proxies = proxy_info
         
         r = session.get(session_base_url)
