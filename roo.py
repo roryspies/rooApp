@@ -98,8 +98,8 @@ def get_session_with_promo(session_base_url, voucher_code):
     for i in range(0,13):
 
         proxy_info = {
-            'http': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000',
-            'https': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000'
+            'http': 'http://XaieaXO45f0Mj6sK:wifi;gb;;;london@rotating.proxyempire.io:9000',
+            'https': 'http://XaieaXO45f0Mj6sK:wifi;gb;;;london@rotating.proxyempire.io:9000'
         }
 
         session = requests.Session()
@@ -398,8 +398,8 @@ def add_token(nonce, user_id, bearer_token, guid, session_guid):
     print("######")
 
     proxy_info = {
-        'http': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000',
-        'https': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000'
+        'http': 'http://XaieaXO45f0Mj6sK:wifi;gb;;;london@rotating.proxyempire.io:9000',
+        'https': 'http://XaieaXO45f0Mj6sK:wifi;gb;;;london@rotating.proxyempire.io:9000'
     }
 
     session = requests.Session()
@@ -439,8 +439,8 @@ def add_token(nonce, user_id, bearer_token, guid, session_guid):
 def signup_plus_trail(payment_method_id, user_id, bearer_token, guid, session_guid):
 
     proxy_info = {
-        'http': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000',
-        'https': 'http://XaieaXO45f0Mj6sK:wifi;us;;;@rotating.proxyempire.io:9000'
+        'http': 'http://XaieaXO45f0Mj6sK:wifi;gb;;;london@rotating.proxyempire.io:9000',
+        'https': 'http://XaieaXO45f0Mj6sK:wifi;gb;;;london@rotating.proxyempire.io:9000'
     }
 
     session = requests.Session()
