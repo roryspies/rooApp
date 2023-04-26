@@ -469,7 +469,7 @@ def signup_plus_trail(payment_method_id, user_id, bearer_token, guid, session_gu
     }
 
     body = {
-        "offer_uname": "uk_monthly_799_2022Q4_90dft",
+        "offer_uname": "uk_monthly_799_2021Q2",
         "payment_method_id": payment_method_id,
         "immediate_charge_ack": False
     }
