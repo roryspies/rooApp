@@ -495,7 +495,7 @@ def send_message_whatsapp(message, user_phone):
 
     return r.json()
 
-def do_roo(sms_man_token, session_base_url, personal_info, card_info, address, voucher_code):
+def do_roo(sms_man_token, session_base_url, personal_info, card_info, address, voucher_code, redeem_voucher):
 
     proceed = False
     user_phone = personal_info["user_phone"]
@@ -596,10 +596,12 @@ def do_roo(sms_man_token, session_base_url, personal_info, card_info, address, v
         print("generated account")
         send_message_whatsapp("generated account", user_phone)
 
-        #Redeem voucher code
-        redeem_code(session, voucher_code, user_id, guid, session_guid, bearer_token)
-
-        print("redeemed voucher")
+        if redeem_voucher:
+            #Redeem voucher code
+            redeem_code(session, voucher_code, user_id, guid, session_guid, bearer_token)
+            print("redeemed voucher)
+        else:
+            print("skipped redeem voucher")
 
         #add address
         add_address(address, session, number, user_id, bearer_token, guid, session_guid)
