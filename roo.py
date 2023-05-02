@@ -599,7 +599,7 @@ def do_roo(sms_man_token, session_base_url, personal_info, card_info, address, v
         if redeem_voucher:
             #Redeem voucher code
             redeem_code(session, voucher_code, user_id, guid, session_guid, bearer_token)
-            print("redeemed voucher)
+            print("redeemed voucher")
         else:
             print("skipped redeem voucher")
 
