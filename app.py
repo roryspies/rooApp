@@ -28,12 +28,13 @@ def run_roo():
     card_info = content['card_info']
     address = content['address']
     voucher_code = content['voucher_code']
+    redeem_voucher = content['redeem_voucher']
     print("triggered")
 
     print("CARD INFO")
     print(card_info)
     
-    do_roo(sms_man_token, session_base_url, personal_info, card_info, address, voucher_code)
+    do_roo(sms_man_token, session_base_url, personal_info, card_info, address, voucher_code, redeem_voucher)
 
     return
 
